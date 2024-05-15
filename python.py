@@ -5,7 +5,7 @@
 #  Print with no variable cause to skip a line
 #  print()
 # print("Anthony")
-# # # Starting your print statment on a new line
+# Starting your print statment on a new line
 # print("The dog ran across the street.\nHe was chasing a car.")
 # # # As you can see, the end keyword argument determines the characters the print() function sends to the output once it reaches the end of its positional arguments
 # print("My name is", "Python.  ", end="%")
