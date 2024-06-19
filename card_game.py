@@ -140,3 +140,6 @@ def texas_holdem():
     print("Player 2's combined hand:", player2_combined)
     print("Winner:", winner)
     print(f"Total pot: {total_pot}")
+
+# Play a game
+texas_holdem()
