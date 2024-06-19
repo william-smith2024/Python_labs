@@ -52,19 +52,37 @@ def determine_winner(score1, score2):
         return "It's a tie!"
 
 # Function to display the current state of the game
-def display_game_state(player1_hand, player2_hand, community_cards):
+def display_game_state(player1_hand, player2_hand, community_cards, player1_chips, player2_chips):
     print("Player 1's hand:", player1_hand)
     print("Player 2's hand:", player2_hand)
     print("Community cards:", community_cards)
+    print(f"Player 1's chips: {player1_chips}")
+    print(f"Player 2's chips: {player2_chips}")
     print()
 
 # Function to simulate a simple poker game
 def texas_holdem():
+    player1_chips = 500
+    player2_chips = 500
+    total_pot = 0
+
+    # Function to handle wagering
+    def wager():
+        nonlocal player1_chips, player2_chips, total_pot
+        wager_amount = int(input("Enter the wager amount: "))
+        player1_chips -= wager_amount
+        player2_chips -= wager_amount
+        total_pot += wager_amount * 2
+
     # Prompt Player 1 to initialize deck and shuffle
     input("Press Enter to initialize the deck and shuffle it...")
     deck = [rank + ' of ' + suit for suit in suits for rank in ranks]
     random.shuffle(deck)
     print("Deck shuffled!")
+
+    # Initial wager
+    wager()
+    display_game_state([], [], [], player1_chips, player2_chips)
 
     # Prompt Player 1 to deal initial cards
     input("Press Enter to deal two cards to each player and three community cards...")
@@ -72,19 +90,31 @@ def texas_holdem():
     player2_hand = [deck.pop(), deck.pop()]
     community_cards = [deck.pop() for _ in range(3)]
     print("Initial cards dealt!")
-    display_game_state(player1_hand, player2_hand, community_cards)
+    display_game_state(player1_hand, player2_hand, community_cards, player1_chips, player2_chips)
+
+    # Wager after initial deal
+    wager()
+    display_game_state(player1_hand, player2_hand, community_cards, player1_chips, player2_chips)
 
     # Prompt Player 1 to deal the fourth community card
     input("Press Enter to deal the fourth community card...")
     community_cards.append(deck.pop())
     print("Fourth community card dealt!")
-    display_game_state(player1_hand, player2_hand, community_cards)
+    display_game_state(player1_hand, player2_hand, community_cards, player1_chips, player2_chips)
+
+    # Wager after fourth community card
+    wager()
+    display_game_state(player1_hand, player2_hand, community_cards, player1_chips, player2_chips)
 
     # Prompt Player 1 to deal the fifth community card
     input("Press Enter to deal the fifth community card...")
     community_cards.append(deck.pop())
     print("Fifth community card dealt!")
-    display_game_state(player1_hand, player2_hand, community_cards)
+    display_game_state(player1_hand, player2_hand, community_cards, player1_chips, player2_chips)
+
+    # Wager after fifth community card
+    wager()
+    display_game_state(player1_hand, player2_hand, community_cards, player1_chips, player2_chips)
 
     # Combine player hands with community cards
     player1_combined = player1_hand + community_cards
@@ -97,12 +127,16 @@ def texas_holdem():
     # Determine the winner
     winner = determine_winner(player1_score, player2_score)
 
+    # Update chips based on the winner
+    if winner == "Player 1 wins!":
+        player1_chips += total_pot
+    elif winner == "Player 2 wins!":
+        player2_chips += total_pot
+
     # Display final results
     print("\n--- Final Results ---")
-    display_game_state(player1_hand, player2_hand, community_cards)
+    display_game_state(player1_hand, player2_hand, community_cards, player1_chips, player2_chips)
     print("Player 1's combined hand:", player1_combined)
     print("Player 2's combined hand:", player2_combined)
     print("Winner:", winner)
-
-# Play a game
-texas_holdem()
+    print(f"Total pot: {total_pot}")
