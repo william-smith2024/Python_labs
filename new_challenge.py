@@ -64,13 +64,13 @@ def tunnel_path():
     play_again()
 
 def sound_path():
-    print("\nYou investigate the sound and find a friendly dog that leads you to the treasure!")
-    print("Congratulations, you win!")
+    print("\nYou investigate the sound and find a friendly dog that leads you down a neverending spiral staircase")
+    print("Sorry, you lose!")
     play_again()
 
 def door_path():
-    print("\nYou open the door and find a room filled with gold!")
-    print("Congratulations, you win!")
+    print("\nYou open the door and are snatched up by an invisible hand, and propelled forward into the darkness forever!")
+    print("Sorry, you lose!")
     play_again()
 
 def basketball_scenario(has_basketball):
