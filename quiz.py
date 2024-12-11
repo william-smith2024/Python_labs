@@ -25,7 +25,14 @@
 #     print(("You chose right!"))
 
 
-# For loop
-for i in range(1, 10):
-    print("Goodnight")
+# # For loop
+# for i in range(1, 10):
+#     print("Goodnight")
 
+# Use an if statement to check if the number is even. A number is even if it is divisible by 2 without any remainder.
+# Print "The number is even." if the number is even, otherwise print "The number is odd."
+number = int(input("Enter a number: "))
+if number % 2 == 0:
+    print("The number is even.")
+else:
+    print("The number is odd")
